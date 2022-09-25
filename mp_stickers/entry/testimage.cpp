@@ -17,7 +17,7 @@ int main() {
 
   std::cout << "Using Image::scale to create `scale.png`..." << std::endl;
   alma.readFromFile("../alma.png");
-  alma.scale(2);
+  alma.scale(0.5);
   alma.writeToFile("../scale2x.png");
 
   return 0;
