@@ -78,7 +78,19 @@ void BinaryTree<T>::printLeftToRight(const Node* subRoot) const
     template <typename T>
 void BinaryTree<T>::mirror()
 {
-    //your code here
+    mirror(root);
+}
+
+template <typename T>
+void BinaryTree<T>::mirror(Node* subRoot) {
+    if (subRoot == NULL) return;
+
+    Node* tmp = subRoot->left;
+    subRoot->left = subRoot->right;
+    subRoot->right = tmp;
+
+    mirror(subRoot->left);
+    mirror(subRoot->right);
 }
 
 
@@ -91,8 +103,15 @@ void BinaryTree<T>::mirror()
 template <typename T>
 bool BinaryTree<T>::isOrderedIterative() const
 {
-    // your code here
-    return false;
+    InorderTraversal<T> i(root);
+    if (i.empty()) return true;
+    Node* curr_value = i.pop();
+    while (!i.empty()) {
+        Node* value = i.pop();
+        if (value->elem < curr_value->elem) return false;
+        curr_value = value;
+    }
+    return true;
 }
 
 /**
@@ -105,6 +124,14 @@ template <typename T>
 bool BinaryTree<T>::isOrderedRecursive() const
 {
     // your code here
-    return false;
+    InorderTraversal<T> i(root);
+    if (i.empty()) return true;
+    Node* curr_value = i.pop();
+    while (!i.empty()) {
+        Node* value = i.pop();
+        if (value->elem < curr_value->elem) return false;
+        curr_value = value;
+    }
+    return true;
 }
 
